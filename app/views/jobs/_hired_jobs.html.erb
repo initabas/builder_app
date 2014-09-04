@@ -1,0 +1,19 @@
+<% if hire.accepted == true %>
+	<div class="alert alert-success">
+		<p><strong>Вы приняты!</strong></p>
+		<p>Свяжитесь с заказчиком</p>
+		<p><%= link_to '<i class="glyphicon glyphicon-user"></i> '.html_safe + hire.job.user.name, user_path(hire.job.user_id) %></p>
+		<p><i class="glyphicon glyphicon-envelope"></i> <%= hire.job.user.email %></p>
+		<p><i class="glyphicon glyphicon-phone-alt"></i> <%= hire.job.user.email %></p>
+	</div>
+<% elsif hire.accepted == false %>
+	<div class="alert alert-danger">
+		К сожалению Вы не приняты к выполнению данной работы!
+	</div>
+<% else %>
+	<div class="alert alert-info">
+		<%= button_to "&times;".html_safe, hire_delete_path(hire.id), class: "close", method: "delete", "aria-hidden" => "true" %>	
+		<p>Ваш запрос обрабатывается!</p>
+		<p>Спасибо за терпение</p>
+	</div>
+<% end %>

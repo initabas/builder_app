@@ -1,0 +1,5 @@
+<h1>Выполненные Работы</h1>
+<%= render partial: "filters/filter_jobs", locals: { jobs: @jobs } %>
+<div class="jobs-list">
+	<%= render partial: "jobs/accepted_job", locals: { jobs: @jobs } %>
+</div>

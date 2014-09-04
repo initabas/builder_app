@@ -1,0 +1,7 @@
+<%= form_tag accepted_jobs_path, method: :get, remote: true do %>
+	<%= select_tag :skill_id, options_from_collection_for_select(Skill.order(:name), :id, :name), include_blank: true, id: "skill_select" %>
+	
+		<%= select_tag :location_id, grouped_options_for_select(grouped_locations), include_blank: true, id: "skill_select1" %>
+	<%#= submit_tag "Найти" %>
+	<%= params[:skill_id] %>
+<% end %>

@@ -1,0 +1,25 @@
+<% if user_signed_in? %>
+	<% unless current_user.try(:id) == job.user_id %>
+		<div id="hire">
+			<% if job.workers.map(&:user).include? current_user %>
+				<% @hire = current_user.rolable.hires.where(:hires => {:job_id => job.id}).first %>
+				<%= render partial: "jobs/hired_jobs", locals: { hire: @hire } %>
+				<%#= button_to "Отказаться", hire_delete_path(@hire.id), class: "btn btn-warning", method: "delete", "aria-hidden" => "true" %>
+			<% else %>
+				<%= link_to '<i class="glyphicon glyphicon-ok"></i> '.html_safe + "Выполнить", hire_path(:job_id => job.id), :class => "btn btn-success btn-block", remote: true %>
+				<div class="job-hire-count">
+					<% if job.hires.count == 0 %>
+						Еще никто не подписался на выполнение этой работы
+					<% elsif job.hires.count == 1 %>
+						1 рабочий<br />
+						готов выполнить эту работу <br />
+					<% else %>
+						<%= job.hires.count.to_s " рабочих" %><br />
+						готово выполнить эту работу
+					<% end %>
+				</div>
+			<% end %>
+	  </div>
+	<% end %>
+<% end %>
+

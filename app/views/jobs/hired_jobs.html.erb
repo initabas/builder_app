@@ -1,0 +1,25 @@
+<h1>Мои Работы</h1>
+  <% @hires.each do |hire| %>
+  	<div class="row">
+	  	<div class="col-md-8">
+				<div class="view-container">
+					<div class="row">
+						<div class="col-md-8">
+				      <p class="list-title"><%= link_to hire.job.title, hire.job %></p>
+				      <p><%= hire.job.description %></p>
+				      <p><%= hire.job.start_date %></p>
+				      <div id="feedback">
+					      <% if hire.job.feedback %>
+					      	<h4>Отзыв</h4>
+					      	<%= hire.job.feedback %>
+					      <% end %>
+				      </div>
+						</div>
+						<div class="col-md-4">
+							<%= render partial: "jobs/hired_jobs", locals: { hire: hire } %>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  <% end %>

@@ -1,0 +1,26 @@
+<%= render "layouts/header" %>
+
+	<div class="container main">
+		<div class="row">
+			<div class="col-sm-8">
+				<%= yield %>
+			</div>
+			<div class="col-sm-3">
+				<ul class="skill-list">
+				<% @skills.each do |skill| %>
+					<% if params[:skill_id].present? && skill.id == params[:skill_id].to_i %>
+						<li class="selected">
+							<span class="remove-selected">
+						 		<%= link_to '<i class="glyphicon glyphicon-remove-circle"></i>'.html_safe, users_path(params.except(:skill_id)) %>
+							</span>
+					<% else %>
+						<li>
+					<% end %>
+							<%= link_to skill.name, users_path(:skill_id => skill.id) %>
+						</li>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+<%= render "layouts/footer" %>

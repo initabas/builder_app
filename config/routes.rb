@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  resources :jobs
+  resources :locations
 
-#   resources :customers
-# 
-#   resources :workers
+  resources :activities
+
+  resources :skills
+
+  resources :jobs 
+#   do
+#   	resources :hires
+#   end
 
   get 'user_registrations/create'
 
@@ -13,11 +18,21 @@ Rails.application.routes.draw do
   get 'welcome/index'
 	
 	devise_scope :user do
+		resources :users
 		match 'worker/sign_up' => 'user_registrations#new', :user => { :user_type => 'worker' }, via: [:get]
 		match 'customer/sign_up' => 'user_registrations#new', :user => { :user_type => 'customer' }, via: [:get]
   end
   
-
+  get "jobs/:job_id/hire"  => "jobs#hire", :as => "hire"
+  get "users/:user_id/job" => "users#jobs", :as => "user_jobs"
+  get "hire/:id/accept" => "jobs#accept", :as => "accept"
+  get "accepted_jobs" => "jobs#accepted_jobs", :as => "accepted_jobs"
+  
+  get "hire/accept" => "jobs#nill", :as => "nill"
+  
+  get "jobs/:job_id/add_feedback" => "jobs#add_feedback", :as => "add_feedback"
+  get "worker/:user_id/job" => "jobs#hired_jobs", :as => "hired_jobs"
+  delete "hire/:hire_id" => "users#hire_delete", :as => "hire_delete"
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

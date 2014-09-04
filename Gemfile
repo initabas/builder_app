@@ -40,3 +40,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'rails_admin'
+gem "select2-rails"
+gem "cancan"
+gem "paperclip", "~> 4.1"
+gem "rolify"

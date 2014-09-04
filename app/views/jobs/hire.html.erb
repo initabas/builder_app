@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+	<% unless current_user.try(:id) == job.user_id %>
+		<div id="hire">
+			<% if job.workers.map(&:user).include? current_user %>
+				<% @hire = current_user.rolable.hires.where(:hires => {:job_id => job.id}).first %>
+				<%= button_to "Отказаться", hire_delete_path(@hire.id), class: "close", method: "delete", "aria-hidden" => "true" %>	
+			<% else %>
+				<%= link_to "Выполнить", hire_path(:job_id => job.id), :class => "btn btn-success" %>
+			<% end %>
+	  </div>
+	<% end %>
+<% end %>
+

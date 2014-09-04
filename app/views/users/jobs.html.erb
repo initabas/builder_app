@@ -1,0 +1,28 @@
+<h1>Мои Заказы</h1>
+  <% @jobs.each do |job| %>
+  	<div class="row">
+	  	<div class="col-md-8">
+				<div class="view-container">
+					<div class="row">
+						<div class="col-md-8">
+				      <p class="list-title"><%= link_to job.title, job %></p>
+				      <p><%= job.description %></p>
+				      <p><%= job.start_date %></p>
+				      <div id="feedback">
+					      <% if job.feedback %>
+					      	<h4>Отзыв</h4>
+					      	<%= job.feedback %>
+					      <% end %>
+				      </div>
+						</div>
+						<div class="col-md-4">
+							<ul class="list-group">
+								<%= render partial: "users/accept", locals: { job: job } %>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  <% end %>
+</div>

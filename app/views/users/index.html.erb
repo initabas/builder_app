@@ -1,0 +1,8 @@
+<h1>Мастера</h1>
+  <% @workers.each do |worker| %>
+		<div class="view-container">
+      <p class="list-title"><%= link_to '<i class="glyphicon glyphicon-user"></i> '.html_safe + worker.user.name, worker.user %></p>
+      <p><%= worker.about %></p>
+		</div>
+  <% end %>
+

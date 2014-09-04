@@ -1,5 +1,5 @@
 class UserRegistrationsController < Devise::RegistrationsController
-  
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def create
     build_resource(sign_up_params)
     # crate a new child instance depending on the given user type
@@ -32,7 +32,11 @@ class UserRegistrationsController < Devise::RegistrationsController
   
   protected
   
+  def configure_permitted_parameters
+  	devise_parameter_sanitizer.for(:sign_up) { |u|u.permit(:name, :about, :user_type, :email, :password, :password_confirmation) }
+  end
+  
   def sign_up_params
-    devise_parameter_sanitizer.sanitize(:sign_up) {|u|u.permit(:about, :user, :user_type, :email, :password, :password_confirmation)}
+    devise_parameter_sanitizer.sanitize(:sign_up) { |u|u.permit(:name, :about, :user_type, :email, :password, :password_confirmation) }
   end
 end

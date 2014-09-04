@@ -1,0 +1,12 @@
+<div id="feedback">
+  <% if job.feedback %>
+    <h4>Отзыв</h4>
+  	<div class="alert alert-warning">
+    	<%= job.feedback %>
+  	</div>
+  <% end %>
+  <% if show_worker == true %>
+  	<strong>Выполнил</strong>
+		<%= link_to job.hires.first.worker.user.try(:name), user_path(:id => job.hires.first.worker.user.id) %>
+	<% end %>
+</div>

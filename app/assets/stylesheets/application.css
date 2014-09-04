@@ -10,11 +10,42 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
- *= require bootstrap.min
+ *= require_self 
+ *= require jquery.ui.all
+ *= require select2
+ *= require select2-bootstrap
+ *= require select2-override
+ *= require bootstrap
+ *= require bootstrap_override
  */
 
-.main {
-	padding: 40px 15px;
+.skill-list {
+	padding-top: 60px;
 }
+
+.skill-list li {
+	display: table;
+}
+.selected a {
+	background-color: #fbca16;
+	padding: 0 8px 0 0;
+	border: solid 1px #fbca16;
+	border-radius: 0 11px 11px 0;
+	float: left;
+}
+.selected .remove-selected a {
+	border-radius: 11px 0px 0px 11px;
+	padding: 0 2px 0 5px;
+	color: white;
+}
+.selected .remove-selected a i {
+	top: 2px;
+}
+.selected .remove-selected a:hover {
+	color: red;
+}
+.remove-selected {
+	float: left;
+	margin-left: -23px;
+}
+.fixed {position:fixed; top:0;}

@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @job.title %>
-</p>
+</h1>
 
 <p>
   <strong>Description:</strong>
@@ -14,6 +13,3 @@
   <strong>Start date:</strong>
   <%= @job.start_date %>
 </p>
-
-<%= link_to 'Edit', edit_job_path(@job) %> |
-<%= link_to 'Back', jobs_path %>

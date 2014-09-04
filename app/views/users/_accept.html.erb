@@ -1,0 +1,22 @@
+<%= link_to "nill", nill_path, class: "btn btn-success btn-xs btn-hire" %>	
+<div id="accept">
+	<% job.hires.order("accepted DESC").each do |hire| %>
+		<li class="li-user-hire list-group-item">
+			<%= link_to hire.worker.user.name, user_path(hire.worker.user), class: "user-hier" %>
+			<% if hire.accepted == true %>
+				<span style="width:60px" class="btn btn-success btn-xs btn-hire"><i class="glyphicon glyphicon-ok-circle"></i></span>
+				<span style="display: block; text-align: center;">
+					<% if hire.job.feedback == nil %>
+						<%= link_to "Оставить отзыв!", add_feedback_path(:job_id => hire.job_id), remote: true %>
+				  <% else %>
+				  	<i style="color:green;" class="glyphicon glyphicon-ok-circle"></i> Спасибо за Ваш отзыв!
+					<% end %>
+				</span>
+			<% elsif hire.accepted == false %>
+				<span style="width:60px" class="btn btn-danger btn-xs btn-hire"><i class="glyphicon glyphicon-ban-circle"></i></span>
+			<% else %>
+				<%= link_to "Принять", { :controller => 'jobs', :action => 'accept', :id => hire.id }, :data => {:confirm => 'You sure you want to reset this junk?'}, class: "btn btn-success btn-xs btn-hire reset-link" %>	
+			<% end %>
+		</li>		
+	<% end %>
+</div>

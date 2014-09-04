@@ -1,29 +1,24 @@
 <h1>Listing jobs</h1>
+<% @jobs.each do |job| %>
+	<div class="row">
+  	<div class="col-md-8">
+			<div id="j-<%= job.id %>" class="view-container">
+				<div class="row">
+					<div class="col-md-8">								
+						<p class="list-title"><%= link_to job.title, job %></p>
+						<p>
+							<%= link_to '<i class="glyphicon glyphicon-user"></i> '.html_safe + job.user.try(:name), user_path(:id => job.user_id) %>
+						</p>
+						<p><%= job.description %></p>
+						<p><%= job.start_date %></p>
+					</div>
+					<div class="col-md-4">
+						<% @hire = current_user.rolable.hires.where(:hires => {:job_id => job.id}).first %>
+						<%= render :partial => "jobs/hire", :locals => { :job => job } %>	
+					</div>
+				</div>
+			</div>
+  	</div>
+	</div>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Start date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.title %></td>
-        <td><%= job.description %></td>
-        <td><%= job.start_date %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Job', new_job_path %>
